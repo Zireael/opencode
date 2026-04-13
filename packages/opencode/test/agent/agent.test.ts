@@ -412,6 +412,46 @@ test("Agent.list keeps the default agent first and sorts the rest by name", asyn
   })
 })
 
+test("Agent.list respects order field as primary sort key", async () => {
+  await using tmp = await tmpdir({
+    config: {
+      default_agent: "plan",
+      agent: {
+        build: { order: 3 },
+        plan: { order: 1 },
+        explore: { order: 2 },
+      },
+    },
+  })
+  await Instance.provide({
+    directory: tmp.path,
+    fn: async () => {
+      const names = (await Agent.list()).map((a) => a.name)
+      // order overrides default_agent: plan is first because order:1, not because it's default
+      expect(names[0]).toBe("plan")
+      expect(names[1]).toBe("explore")
+      expect(names[2]).toBe("build")
+    },
+  })
+})
+
+test("agent order can be set from config", async () => {
+  await using tmp = await tmpdir({
+    config: {
+      agent: {
+        build: { order: 10 },
+      },
+    },
+  })
+  await Instance.provide({
+    directory: tmp.path,
+    fn: async () => {
+      const build = await Agent.get("build")
+      expect(build?.order).toBe(10)
+    },
+  })
+})
+
 test("Agent.get returns undefined for non-existent agent", async () => {
   await using tmp = await tmpdir()
   await Instance.provide({

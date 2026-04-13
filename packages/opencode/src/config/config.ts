@@ -511,6 +511,7 @@ export namespace Config {
         .describe("Maximum number of agentic iterations before forcing text-only response"),
       maxSteps: z.number().int().positive().optional().describe("@deprecated Use 'steps' field instead."),
       permission: Permission.optional(),
+      order: z.number().int().optional().describe("Display order in the agent list. Lower values appear first."),
     })
     .catchall(z.any())
     .transform((agent, ctx) => {
@@ -531,6 +532,7 @@ export namespace Config {
         "permission",
         "disable",
         "tools",
+        "order",
       ])
 
       // Extract unknown properties into options
