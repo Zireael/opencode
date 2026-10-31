@@ -1,15 +1,16 @@
 name: close-stale-prs
 
 on:
+  # Automatic triggers (push / pull_request / schedule / release /
+  # workflow_run / ...) were removed on 2026-10-31. This workflow now
+  # runs only when started by hand: Actions tab -> Run workflow, or
+  # `gh workflow run <file>`.
   workflow_dispatch:
     inputs:
       dryRun:
         description: "Log actions without closing PRs"
         type: boolean
         default: false
-  schedule:
-    - cron: "0 6 * * *"
-
 permissions:
   contents: read
   issues: write
