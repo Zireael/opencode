@@ -1,12 +1,11 @@
 name: release-github-action
 
 on:
-  push:
-    branches:
-      - dev
-    paths:
-      - "github/**"
-
+  # Automatic triggers (push / pull_request / schedule / release /
+  # workflow_run / ...) were removed on 2026-10-31. This workflow now
+  # runs only when started by hand: Actions tab -> Run workflow, or
+  # `gh workflow run <file>`.
+  workflow_dispatch:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
