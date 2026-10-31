@@ -1,9 +1,10 @@
 name: daily-issues-recap
 
 on:
-  schedule:
-    # Run at 6 PM EST (23:00 UTC, or 22:00 UTC during daylight saving)
-    - cron: "0 23 * * *"
+  # Automatic triggers (push / pull_request / schedule / release /
+  # workflow_run / ...) were removed on 2026-10-31. This workflow now
+  # runs only when started by hand: Actions tab -> Run workflow, or
+  # `gh workflow run <file>`.
   workflow_dispatch: # Allow manual trigger for testing
 
 jobs:
