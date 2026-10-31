@@ -1,9 +1,10 @@
 name: daily-pr-recap
 
 on:
-  schedule:
-    # Run at 5pm EST (22:00 UTC, or 21:00 UTC during daylight saving)
-    - cron: "0 22 * * *"
+  # Automatic triggers (push / pull_request / schedule / release /
+  # workflow_run / ...) were removed on 2026-10-31. This workflow now
+  # runs only when started by hand: Actions tab -> Run workflow, or
+  # `gh workflow run <file>`.
   workflow_dispatch: # Allow manual trigger for testing
 
 jobs:
