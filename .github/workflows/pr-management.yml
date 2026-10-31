@@ -1,9 +1,11 @@
 name: pr-management
 
 on:
-  pull_request_target:
-    types: [opened]
-
+  # Automatic triggers (push / pull_request / schedule / release /
+  # workflow_run / ...) were removed on 2026-10-31. This workflow now
+  # runs only when started by hand: Actions tab -> Run workflow, or
+  # `gh workflow run <file>`.
+  workflow_dispatch:
 jobs:
   check-duplicates:
     runs-on: blacksmith-4vcpu-ubuntu-2404
